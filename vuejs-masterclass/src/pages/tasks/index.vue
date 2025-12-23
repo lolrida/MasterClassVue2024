@@ -3,28 +3,27 @@ import { supabase } from '@/lib/supabaseClient';
 import  {ref} from 'vue';
 import type { Tables } from '../../../database/types';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const projects = ref<Tables<'projects'>[] | null>(null);
+const tasks = ref<Tables<'tasks'>[] | null>(null);
 
 (async () => {
     const {data, error} = await supabase
-        .from('projects')
+        .from('tasks')
         .select('*')
 
     if (error) 
-        console.error('Error fetching projects:', error)
-    projects.value = data
+        console.error('Error fetching tasks:', error)
+    tasks.value = data
 
-    console.log('Projects:', projects.value)
+   
 })()
 </script>
 
 <template>
-    <div>Project page</div>
+    <div>Tasks page</div>
     <router-link to="/">Go to Home</router-link>
     <ul>
-        <li v-for="project in projects" :key="project.id" >
-            {{ project.name }}
-            
+        <li v-for="task in tasks" :key="task.id">
+            {{ task.name }}
         </li>
     </ul>
 

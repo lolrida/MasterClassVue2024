@@ -1,10 +1,13 @@
 <script setup lang="ts">
 
+
 </script>
 
 <template>
-    <div>Home page</div>
-    <router-link :to="{ name: '/projects/[id]', params: { id: 1 } }">Go to Project 1</router-link>
+    <div>
+        <h1>Welcome to the Home Page</h1>
+        <router-link to="/projects">Go to Projects</router-link>
+    </div>
 </template>
 
-<style scoped></style>
+
