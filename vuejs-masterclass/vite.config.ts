@@ -30,9 +30,14 @@ export default defineConfig({
         /\.vue\.[tj]sx?\?vue/, // .vue (vue-loader with experimentalInlineMatchResource enabled)
         /\.md$/, // .md
       ],
-      imports: ['vue', 'vue-router'],
+      imports: ['vue', 'vue-router',
+        {
+          pinia: ['defineStore', 'storeToRefs', 'acceptHMRUpdate'],
+        }
+      ],
       dts: true,
       viteOptimizeDeps: true,
+      dirs: ['./src/stores'],
     }),
     Components({
       dts: true,

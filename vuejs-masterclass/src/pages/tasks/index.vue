@@ -3,9 +3,9 @@ defineOptions({ name: 'TasksListPage' })
 import { supabase } from '@/lib/supabaseClient'
 import type { Tables } from '../../../database/types'
 import type { ColumnDef } from '@tanstack/vue-table'
-
 const tasks = ref<Tables<'tasks'>[] | null>(null)
 
+usePageStore().pageData.title = 'Tasks Page'
 const getTasks = async () => {
   const { data, error } = await supabase.from('tasks').select('*')
 
