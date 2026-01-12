@@ -24,9 +24,19 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.43.4",
+    "@tailwindcss/vite": "^4.1.18",
+    "@tanstack/vue-table": "^8.21.3",
+    "@vueuse/core": "^14.1.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "dotenv": "^17.2.3",
+    "iconify-icon": "^3.0.2",
+    "lucide-vue-next": "^0.562.0",
     "pinia": "^3.0.4",
-    "vue": "^3.5.25",
+    "reka-ui": "^2.7.0",
+    "tailwind-merge": "^3.4.0",
+    "tailwindcss-animate": "^1.0.7",
+    "vue": "^3.5.26",
     "vue-router": "^4.6.3"
   },
   "devDependencies": {
@@ -39,15 +49,16 @@
     "@vue/tsconfig": "^0.8.1",
     "eslint": "^9.39.1",
     "eslint-plugin-vue": "~10.5.1",
-    "jiti": "^2.6.1",
     "npm-run-all2": "^8.0.4",
     "prettier": "3.6.2",
     "supabase": "^2.69.0",
+    "tailwindcss": "^4.1.18",
     "typescript": "~5.9.0",
-    "unplugin-vue-router": "^0.19.1",
+    "unplugin-auto-import": "^20.3.0",
+    "unplugin-vue-components": "^30.0.0",
+    "unplugin-vue-router": "^0.19.2",
     "vite": "^7.2.4",
     "vite-plugin-vue-devtools": "^8.0.5",
-    "vue-tsc": "^3.1.5",
-    "tailwindcss": "4.1.18"
+    "vue-tsc": "^3.1.5"
   }
 }
