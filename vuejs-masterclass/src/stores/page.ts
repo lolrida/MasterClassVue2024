@@ -10,6 +10,7 @@ export const usePageStore = defineStore('page-store', () => {
     pageData,
   }
 
+
 })
 
 if (import.meta.hot) {

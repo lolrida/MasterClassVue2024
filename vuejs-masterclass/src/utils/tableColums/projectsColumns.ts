@@ -1,8 +1,8 @@
 import type { ColumnDef } from '@tanstack/vue-table'
-import type { project } from '../supaQuery'
+import type { Project } from '../supaQuery'
 import { RouterLink } from 'vue-router'
 
-export const columns: ColumnDef<project>[] = [
+export const columns: ColumnDef<Project>[] = [
   {
     accessorKey: 'name',
     header: () => h('div', { class: 'text-left' }, 'Name'),
@@ -10,21 +10,10 @@ export const columns: ColumnDef<project>[] = [
       return h(
         RouterLink,
         {
-          to: `/projects/${row.original.name}`,
+          to: `/projects/${row.original.slug}`,
           class: 'text-left font-medium hover:bg-muted block w-full',
         },
         () => row.getValue('name'),
-      )
-    },
-  },
-  {
-    accessorKey: 'slug',
-    header: () => h('div', { class: 'text-left' }, 'Slug'),
-    cell: ({ row }) => {
-      return h(
-        RouterLink,
-        { to: `/projects/${row.original.slug}`, class: 'text-left font-medium' },
-        row.getValue('slug'),
       )
     },
   },

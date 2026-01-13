@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import Spinner from '@/components/ui/spinner/Spinner.vue'
 import { projectQuery } from '@/utils/supaQuery'
-import type { project } from '@/utils/supaQuery'
+import type { Project } from '@/utils/supaQuery'
 import { columns } from '@/utils/tableColums/projectsColumns'
 
-const projects = ref<project | null>(null)
+const projects = ref<Project | null>(null)
 const loading = ref(true)
 
 usePageStore().pageData.title = 'Projects Page'

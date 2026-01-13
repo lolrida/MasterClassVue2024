@@ -7,7 +7,7 @@ const supabase = createClient(process.env.VITE_SUPABASE_URL, process.env.VITE_SE
 
 const logErrorAndExit = (tableName, error) => {
   console.error(
-    `An error occurred in table '${tableName}' with code ${error.code}: ${error.message}`
+    `An error occurred in table '${tableName}' with code ${error.code}: ${error.message}`,
   )
   process.exit(1)
 }
@@ -27,7 +27,8 @@ const seedProjects = async (numEntries) => {
       name: name,
       slug: name.toLocaleLowerCase().replace(/ /g, '-'),
       status: faker.helpers.arrayElement(['in-progress', 'completed']),
-      collaborators: faker.helpers.arrayElements([1, 2, 3])
+      description: faker.lorem.paragraph(2),
+      collaborators: faker.helpers.arrayElements([1, 2, 3]),
     })
   }
 
@@ -51,7 +52,7 @@ const seedTasks = async (numEntries, projectsIds) => {
       description: faker.lorem.paragraph(),
       due_date: faker.date.future(),
       project_id: faker.helpers.arrayElement(projectsIds),
-      collaborators: faker.helpers.arrayElements([1, 2, 3])
+      collaborators: faker.helpers.arrayElements([1, 2, 3]),
     })
   }
 

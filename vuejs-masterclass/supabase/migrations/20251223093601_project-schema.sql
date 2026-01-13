@@ -9,6 +9,7 @@ create table
     name text not null, 
     slug text unique not null,
     status current_status default 'in-progress' not null,
+    description text,
     collaborators text array default array[]::varchar[] not null
   );
 
