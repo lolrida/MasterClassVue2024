@@ -37,11 +37,25 @@ declare module 'vue-router/auto-routes' {
       { catchAll: ParamValue<false> },
       | never
     >,
+    '/login': RouteRecordInfo<
+      '/login',
+      '/login',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/projects/': RouteRecordInfo<
       '/projects/',
       '/projects',
       Record<never, never>,
       Record<never, never>,
+      | never
+    >,
+    '/projects/[...catchAll]': RouteRecordInfo<
+      '/projects/[...catchAll]',
+      '/projects/:catchAll(.*)',
+      { catchAll: ParamValue<true> },
+      { catchAll: ParamValue<false> },
       | never
     >,
     '/projects/[slug]': RouteRecordInfo<
@@ -51,11 +65,25 @@ declare module 'vue-router/auto-routes' {
       { slug: ParamValue<false> },
       | never
     >,
+    '/register': RouteRecordInfo<
+      '/register',
+      '/register',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/tasks/': RouteRecordInfo<
       '/tasks/',
       '/tasks',
       Record<never, never>,
       Record<never, never>,
+      | never
+    >,
+    '/tasks/[...catchAll]': RouteRecordInfo<
+      '/tasks/[...catchAll]',
+      '/tasks/:catchAll(.*)',
+      { catchAll: ParamValue<true> },
+      { catchAll: ParamValue<false> },
       | never
     >,
     '/tasks/[id]': RouteRecordInfo<
@@ -90,9 +118,21 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
+    'src/pages/login.vue': {
+      routes:
+        | '/login'
+      views:
+        | never
+    }
     'src/pages/projects/index.vue': {
       routes:
         | '/projects/'
+      views:
+        | never
+    }
+    'src/pages/projects/[...catchAll].vue': {
+      routes:
+        | '/projects/[...catchAll]'
       views:
         | never
     }
@@ -102,9 +142,21 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
+    'src/pages/register.vue': {
+      routes:
+        | '/register'
+      views:
+        | never
+    }
     'src/pages/tasks/index.vue': {
       routes:
         | '/tasks/'
+      views:
+        | never
+    }
+    'src/pages/tasks/[...catchAll].vue': {
+      routes:
+        | '/tasks/[...catchAll]'
       views:
         | never
     }

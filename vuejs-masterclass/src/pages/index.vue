@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 import { ArrowUpRightIcon } from 'lucide-vue-next'
@@ -13,6 +14,8 @@ const getHome = async () => {
   }, 1000)
 }
 await getHome()
+
+
 </script>
 
 <template>

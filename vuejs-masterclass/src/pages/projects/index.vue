@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import Spinner from '@/components/ui/spinner/Spinner.vue'
 import { projectQuery } from '@/utils/supaQuery'
@@ -25,7 +26,7 @@ await getProjects()
 <template>
   <div class="container py-10 mx-auto">
     <Spinner v-if="loading" class="mx-auto my-10" />
-    <DataTable v-else-if="projects" :columns="columns" :data="projects ?? []" />
+    <DataTable v-else-if="projects" :columns="columns" :data="projects" />
   </div>
 </template>
 
