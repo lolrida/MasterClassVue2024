@@ -21,3 +21,7 @@ export const errorPageStore = defineStore('error-page', () => {
     stateErrorPage,
   }
 })
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(errorPageStore, import.meta.hot))
+}

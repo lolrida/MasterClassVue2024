@@ -1,6 +1,23 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
+import { login } from '@/utils/supaAuth'
+
 usePageStore().pageData.title = ''
+const router = useRouter()
+
+
+const formData = ref({
+  email: '',
+  password: '',
+})
+
+const singin = async () => {
+  const isLogin = await login(formData.value)
+
+  if(isLogin) router.push('/')
+
+
+}
 </script>
 
 <template>
@@ -16,17 +33,28 @@ usePageStore().pageData.title = ''
           <Separator label="Or" />
         </div>
 
-        <form class="grid gap-4">
+        <form class="grid gap-4" @submit.prevent="singin">
           <div class="grid gap-2">
             <Label id="email" class="text-left">Email</Label>
-            <Input type="email" placeholder="johndoe19@example.com" required />
+            <Input
+              type="email"
+              placeholder="johndoe19@example.com"
+              required
+              v-model="formData.email"
+            />
           </div>
           <div class="grid gap-2">
             <div class="flex items-center">
               <Label id="password">Password</Label>
               <a href="#" class="inline-block ml-auto text-xs underline"> Forgot your password? </a>
             </div>
-            <Input id="password" type="password" autocomplete required />
+            <Input
+              id="password"
+              type="password"
+              autocomplete
+              required
+              v-model="formData.password"
+            />
           </div>
           <Button type="submit" class="w-full"> Login </Button>
         </form>
