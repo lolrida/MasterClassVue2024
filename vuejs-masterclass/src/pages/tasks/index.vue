@@ -1,29 +1,18 @@
 <script setup lang="ts">
 defineOptions({ name: 'TasksListPage' })
-import { tasksWithProjectsQuery } from '@/utils/supaQuery'
-import type { tasksWithProjects } from '@/utils/supaQuery'
 import { columns } from '@/utils/tableColums/tasksColumns'
-import { errorPageStore } from '@/stores/error'
 import ErrorPage from '@/Error/errorPage.vue'
+import Spinner from '@/components/ui/spinner/Spinner.vue'
 
 usePageStore().pageData.title = 'Tasks Page'
-
-const tasks = ref<tasksWithProjects | null>(null)
 const errorStore = errorPageStore()
-
-const getTasks = async () => {
-  const { data, error } = await tasksWithProjectsQuery
-
-  if (error) {
-    console.error('I am an uncaught error', error)
-    errorStore.stateErrorPage({ error: Error('I am an uncaught error') })
-    return
-  }
-
-  tasks.value = data
-}
+const loading = ref(true)
+const tasksLoader = useTaskStore()
+const { tasks } = storeToRefs(tasksLoader)
+const { getTasks } = tasksLoader
 
 await getTasks()
+loading.value = false
 </script>
 
 <template>
@@ -32,7 +21,8 @@ await getTasks()
       <ErrorPage />
     </template>
     <template v-else>
-      <DataTable :columns="columns" :data="tasks ?? []" />
+      <Spinner v-if="loading" class="mx-auto my-10" />
+      <DataTable v-else-if="tasks" :columns="columns" :data="tasks" />
     </template>
   </div>
 </template>

@@ -1,6 +1,5 @@
 import { supabase } from "@/lib/supabaseClient"
 import type { LoginForm, RegisterForm } from "@/types/authForm"
-const authStore = useAuthUser()
 
 
 export const register = async (formData: RegisterForm) => {
@@ -10,7 +9,8 @@ export const register = async (formData: RegisterForm) => {
   })
 
   if (error) {
-    return console.error('Error signing up:', error)
+    console.log('email o password errati')
+    return error
   }
 
   if (data.user) {
@@ -23,21 +23,23 @@ export const register = async (formData: RegisterForm) => {
     if(error) return console.log('Profile error : ', error)
   }
 
-  await authStore.setAuth(data.session)
     return true
 }
 
 export const login = async (formData: LoginForm) => {
-  const { data, error } = await supabase.auth.signInWithPassword({
+  const { error } = await supabase.auth.signInWithPassword({
     email: formData.email,
     password: formData.password,
   })
 
-  if (error) return console.log('Error logging in:', error)
-  else {
-    await authStore.setAuth(data.session)
+  if(error) return console.log('Errore nel login')
+
+}
+
+export const logout = async() => {
+  const {error} = await supabase.auth.signOut()
+  if(error) console.log(error)
 
     return true
   }
-}
 

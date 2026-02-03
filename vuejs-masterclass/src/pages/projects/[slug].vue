@@ -1,11 +1,12 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import type { projectBySlug } from '@/utils/supaQuery'
-import { projectQueryBySlug } from '@/utils/supaQuery'
 import { usePageStore } from '@/stores/page'
-const route = useRoute('/projects/[slug]')
+const {slug} = useRoute('/projects/[slug]').params
 
-const project = ref<projectBySlug | null>(null)
+const projectsLoader = useProjectsStore()
+const {project} = storeToRefs(projectsLoader)
+const {getProject} = projectsLoader
+
 
 watch(
   () => project.value?.name,
@@ -14,16 +15,9 @@ watch(
   },
 )
 
-const getProject = async () => {
-  const { data, error } = await projectQueryBySlug(route.params.slug)
 
-  if (error) console.error('Error fetching projects:', error)
 
-  project.value = data
-  console.log(data)
-}
-
-await getProject()
+await getProject(slug)
 </script>
 
 <template>

@@ -1,23 +1,30 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { login } from '@/utils/supaAuth'
+import { watchDebounced } from '@vueuse/core'
+
 
 usePageStore().pageData.title = ''
 const router = useRouter()
-
 
 const formData = ref({
   email: '',
   password: '',
 })
+const { serverError, realtimeError , handleError, handleLoginFormError } = useServerError()
 
 const singin = async () => {
-  const isLogin = await login(formData.value)
+  const error = await login(formData.value)
 
-  if(isLogin) router.push('/')
-
-
+  if (!error) return router.push('/')
+  handleError(error)
 }
+
+watchDebounced(formData, () => {
+  handleLoginFormError(formData.value)
+},{
+  debounce:1000, deep: true
+})
 </script>
 
 <template>
@@ -41,7 +48,9 @@ const singin = async () => {
               placeholder="johndoe19@example.com"
               required
               v-model="formData.email"
+              :class="{ 'border-red-500': serverError }"
             />
+            <span v-if="realtimeError">{{ serverError }}</span>
           </div>
           <div class="grid gap-2">
             <div class="flex items-center">
@@ -54,8 +63,15 @@ const singin = async () => {
               autocomplete
               required
               v-model="formData.password"
+              :class="{ 'border-red-500': serverError }"
             />
           </div>
+          <span
+            v-for="error in realtimeError?.email"
+            :key="error"
+            :class="{ 'text-red-500 text-left': serverError }"
+            >{{ serverError }}</span
+          >
           <Button type="submit" class="w-full"> Login </Button>
         </form>
         <div class="mt-4 text-sm text-center">

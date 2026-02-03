@@ -7,6 +7,7 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue').EffectScope
+  const _error: typeof import('./src/composables/serverError')._error
   const acceptHMRUpdate: typeof import('pinia').acceptHMRUpdate
   const computed: typeof import('vue').computed
   const createApp: typeof import('vue').createApp
@@ -18,6 +19,7 @@ declare global {
   const effectScope: typeof import('vue').effectScope
   const errorPageStore: typeof import('./src/stores/error').errorPageStore
   const getActivePinia: typeof import('pinia').getActivePinia
+  const getCollabs: typeof import('./src/composables/collabs').getCollabs
   const getCurrentInstance: typeof import('vue').getCurrentInstance
   const getCurrentScope: typeof import('vue').getCurrentScope
   const getCurrentWatcher: typeof import('vue').getCurrentWatcher
@@ -70,15 +72,19 @@ declare global {
   const unref: typeof import('vue').unref
   const useAttrs: typeof import('vue').useAttrs
   const useAuthUser: typeof import('./src/stores/auth').useAuthUser
+  const useCollabs: typeof import('./src/composables/collabs').useCollabs
   const useCssModule: typeof import('vue').useCssModule
   const useCssVars: typeof import('vue').useCssVars
   const useId: typeof import('vue').useId
   const useLink: typeof import('vue-router').useLink
   const useModel: typeof import('vue').useModel
   const usePageStore: typeof import('./src/stores/page').usePageStore
+  const useProjectsStore: typeof import('./src/stores/loaders/projects').useProjectsStore
   const useRoute: typeof import('vue-router').useRoute
   const useRouter: typeof import('vue-router').useRouter
+  const useServerError: typeof import('./src/composables/serverError').useServerError
   const useSlots: typeof import('vue').useSlots
+  const useTaskStore: typeof import('./src/stores/loaders/tasks').useTaskStore
   const useTemplateRef: typeof import('vue').useTemplateRef
   const watch: typeof import('vue').watch
   const watchEffect: typeof import('vue').watchEffect

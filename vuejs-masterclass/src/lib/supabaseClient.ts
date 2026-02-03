@@ -6,4 +6,4 @@ export const supabase = createClient<Database>(
     import.meta.env.VITE_SERVICE_ROLE_KEY
 )
 
-console.log(import.meta.env.VITE_SERVICE_ROLE_KEY)
+

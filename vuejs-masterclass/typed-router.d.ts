@@ -100,6 +100,13 @@ declare module 'vue-router/auto-routes' {
       { id: ParamValue<false> },
       | never
     >,
+    '/users/[username]': RouteRecordInfo<
+      '/users/[username]',
+      '/users/:username',
+      { username: ParamValue<true> },
+      { username: ParamValue<false> },
+      | never
+    >,
   }
 
   /**
@@ -176,6 +183,12 @@ declare module 'vue-router/auto-routes' {
     'src/pages/tasks/[id].vue': {
       routes:
         | '/tasks/[id]'
+      views:
+        | never
+    }
+    'src/pages/users/[username].vue': {
+      routes:
+        | '/users/[username]'
       views:
         | never
     }

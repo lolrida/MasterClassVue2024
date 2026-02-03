@@ -1,33 +1,32 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import Spinner from '@/components/ui/spinner/Spinner.vue'
-import { projectQuery } from '@/utils/supaQuery'
-import type { Project } from '@/utils/supaQuery'
 import { columns } from '@/utils/tableColums/projectsColumns'
 
-const projects = ref<Project | null>(null)
 const loading = ref(true)
 
 usePageStore().pageData.title = 'Projects Page'
 
-const getProjects = async () => {
-  loading.value = true
-  const { data, error } = await projectQuery
+const projectsLoader = useProjectsStore()
+const { projects } = storeToRefs(projectsLoader)
+const { getProject } = projectsLoader
 
-  if (error) console.error('Error fetching projects:', error)
+await getProject()
 
-  projects.value = data
-  loading.value = false
-}
+loading.value = false
 
-await getProjects()
+const { getGroupCollabs, groupedCollab } = useCollabs()
+
+await getGroupCollabs(projects.value ?? [])
+
+const columnsWithCollabs = columns(groupedCollab)
 </script>
 
 <template>
   <div class="container py-10 mx-auto">
     <Spinner v-if="loading" class="mx-auto my-10" />
-    <DataTable v-else-if="projects" :columns="columns" :data="projects" />
+    <DataTable v-else-if="projects" :columns="columnsWithCollabs" :data="projects" />
   </div>
+  
 </template>
 
-<style scoped></style>

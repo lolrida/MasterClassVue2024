@@ -1,7 +1,4 @@
 <script setup lang="ts">
-
-
-
 const links = [
   { title: 'Dashboard', icon: 'lucide:house', to: '/' },
   { title: 'Projects', icon: 'lucide:building-2', to: '/projects' },
@@ -11,10 +8,18 @@ const links = [
 const accountLinks = [
   { title: 'Profile', icon: 'lucide:user', to: '/profile' },
   { title: 'Settings', icon: 'lucide:settings', to: '/settings' },
-  { title: 'Sign out', icon: 'lucide:log-out'}
+  { title: 'Sign out', icon: 'lucide:log-out' },
 ]
+const route = useRouter()
+const executeEmits = async (linkTitle: string) => {
+  if (linkTitle === 'Sign out') {
+    const { logout } = await import('@/utils/supaAuth')
+    const isLoggedOut = await logout()
 
-
+    if (isLoggedOut)
+      route.push('/login')
+  }
+}
 </script>
 
 <template>
@@ -37,9 +42,8 @@ const accountLinks = [
       </div>
 
       <div class="border-y text-center bg-background py-3">
-        <RouterLinksSideBar :links="accountLinks" />
+        <RouterLinksSideBar :links="accountLinks" @actionClicked="executeEmits" />
       </div>
     </nav>
   </aside>
 </template>
-

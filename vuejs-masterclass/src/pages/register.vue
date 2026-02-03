@@ -2,7 +2,8 @@
 <script setup lang="ts">
 import router from '@/router';
 import { register } from '@/utils/supaAuth';
-
+import { handleUsername } from '@/utils/formValidation';
+const { } = useServerError()
 const formData = ref({
   username: '',
   first_name: '',
@@ -11,13 +12,31 @@ const formData = ref({
   password: '',
   confirm_password: '',
 })
+const realtimeError = ref(false)
 
 const signup = async () => {
+
+  if(formData.value?.password.length <= 6){
+    realtimeError.value = true
+    console.log('Password troppo corta')
+    return
+  }
+
   const isRegistered = await register(formData.value)
 
-  if(isRegistered) router.push('/') 
+  if(isRegistered === true) {
+
+    await router.push('/')
+
+  }else {
+    const errorHandle = await handleUsername(formData.value.username)
+    if(errorHandle.length)
+      console.log('Errore di registrazione')
+  }
 
 }
+
+
 
 
 
@@ -27,7 +46,8 @@ const signup = async () => {
   <div
     class="mx-auto w-full flex justify-center items-center p-10 text-center -mt-10 min-h-[90vh] h-full"
   >
-    <Card class="max-w-sm w-full mx-auto h-full">
+    <div>
+      <Card class="max-w-sm w-full mx-auto h-full">
       <CardHeader>
         <CardTitle class="text-2xl"> Register </CardTitle>
         <CardDescription> Create a new account </CardDescription>
@@ -113,5 +133,6 @@ const signup = async () => {
         </div>
       </CardContent>
     </Card>
+    </div>
   </div>
 </template>
